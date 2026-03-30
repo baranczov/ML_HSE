@@ -65,36 +65,6 @@ python src/train.py --config configs/default.yaml
 python src/evaluate.py --config configs/default.yaml --model models/best_model.pth
 ```
 
-## Project Structure
-
-```
-ML_HSE/
-├── README.md                 # Project documentation
-├── requirements.txt          # Dependencies with pinned versions
-├── .gitignore                # Git ignore rules
-├── configs/
-│   └── default.yaml          # Experiment configuration (hyperparameters)
-├── src/
-│   ├── __init__.py
-│   ├── train.py              # Main training script
-│   ├── evaluate.py           # Model evaluation script
-│   ├── utils.py              # Helper functions (metrics, visualization)
-│   ├── data/
-│   │   ├── dataset.py        # PyTorch Dataset for UTKFace
-│   │   └── preprocessing.py  # Label parsing, data splitting
-│   └── models/
-│       └── resnet_model.py   # Model architecture (ResNet18)
-├── notebooks/                # Jupyter notebooks for EDA
-│   ├── notebook_v1.ipynb
-│   └── notebook_v2.ipynb
-├── examples/                 # Reference solutions
-│   ├── example_1.ipynb
-│   └── example_2.ipynb
-├── logs/                     # Experiment logs (TensorBoard)
-├── models/                   # Saved model weights
-└── results/                  # Evaluation results (predictions, metrics)
-```
-
 ## References
 
 - [UTKFace Dataset](https://susanqq.github.io/UTKFace/)
