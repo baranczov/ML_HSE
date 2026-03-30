@@ -1,0 +1,39 @@
+# Data settings
+data:
+  img_size: 224
+  batch_size: 64
+  num_workers: 2
+  seed: 42
+  test_size: 0.2
+
+# Augmentations
+augmentation:
+  resize: 256
+  crop_size: 224
+  flip_prob: 0.5
+  brightness: 0.15
+  contrast: 0.15
+  saturation: 0.1
+
+# Model settings
+model:
+  name: resnet18
+  pretrained: true
+  dropout: 0.2
+
+# Training settings
+training:
+  epochs_head: 3
+  epochs_finetune: 7
+  lr_head: 0.001
+  lr_finetune: 0.0003
+  weight_decay: 0.0001
+  patience: 3
+  beta_smooth_l1: 5.0
+
+# Paths
+paths:
+  data_dir: "/kaggle/input/datasets/jangedoo/utkface-new/UTKFace"
+  logs_dir: "logs/"
+  models_dir: "models/"
+  results_dir: "results/"
