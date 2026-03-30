@@ -4,7 +4,7 @@ Computer Vision project for predicting age from facial images using transfer lea
 
 ![Face age estimation](https://github.com/user-attachments/assets/f8c3c5ed-7ed3-414e-aa90-00a4af27bf38)
 
-## 📌 Project Overview
+## Project Overview
 
 | | |
 |---|---|
@@ -14,14 +14,12 @@ Computer Vision project for predicting age from facial images using transfer lea
 | **Loss** | Smooth L1 Loss (Huber loss) for robustness to outliers |
 | **Framework** | PyTorch + torchvision |
 
-## 📊 Results
+## Results
 
 | Metric | Value |
 |--------|-------|
 | RMSE | 7.38 |
 | MAE | 5.20 |
-| Acc@5 | 44.5% |
-| Acc@10 | 68.3% |
 
 ### Performance by Age Group
 
@@ -40,7 +38,7 @@ Computer Vision project for predicting age from facial images using transfer lea
 
 **Observation**: Model performs best on ages 20-50 (most frequent in dataset) and struggles with children (0-12) and elderly (80+), likely due to class imbalance and rapid facial changes.
 
-## 🚀 How to Run
+## How to Run
 
 ### 1. Clone the repository
 ```bash
@@ -67,7 +65,7 @@ python src/train.py --config configs/default.yaml
 python src/evaluate.py --config configs/default.yaml --model models/best_model.pth
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ML_HSE/
@@ -97,7 +95,7 @@ ML_HSE/
 └── results/                  # Evaluation results (predictions, metrics)
 ```
 
-## 🔬 Exploratory Data Analysis
+## Exploratory Data Analysis
 
 ### Age Distribution
 The dataset shows two distinct peaks:
@@ -127,7 +125,7 @@ The dataset shows two distinct peaks:
 ![Age by gender](https://via.placeholder.com/600x300?text=Age+by+Gender+Plot)
 *Placeholder: insert stacked bar chart of age bins by gender*
 
-## ⚠️ Error Analysis
+## Error Analysis
 
 ### Key Findings
 1. **Children (0-12 years)**: RMSE = 5.7-6.1 — facial features change rapidly, making accurate age estimation difficult
@@ -143,7 +141,7 @@ The dataset shows two distinct peaks:
 - **Ordinal regression**: Treat as ordinal classification instead of pure regression
 - **Uncertainty estimation**: Predict age distribution rather than single value
 
-## 🛠️ Technical Details
+## Technical Details
 
 ### Model Architecture
 - **Backbone**: ResNet18 (pretrained on ImageNet)
@@ -167,7 +165,7 @@ transforms.Compose([
 ])
 ```
 
-## 📈 Experiment Tracking
+## Experiment Tracking
 
 ### Logged Artifacts
 - Training loss per epoch
@@ -179,19 +177,15 @@ transforms.Compose([
 ### Example Logs (TensorBoard)
 *Placeholder: insert TensorBoard screenshot*
 
-## 📝 References
+## References
 
 - [UTKFace Dataset](https://susanqq.github.io/UTKFace/)
 - [ResNet: Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385)
 - [PyTorch ResNet18 Documentation](https://pytorch.org/vision/stable/models/generated/torchvision.models.resnet18.html)
 
-## 👥 Authors
+## Authors
 
 - **Баранцов Данил**
 - **Костырин Николай**
 
 Group 08, ML Course, HSE
-
-## 📄 License
-
-This project is for educational purposes only.
