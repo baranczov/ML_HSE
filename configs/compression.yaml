@@ -1,0 +1,63 @@
+# Configuration for model compression pipeline (GP-5)
+# Run locally with: python src/train.py --config configs/compression.yaml
+# Or open notebooks/notebook_v5_compression.ipynb
+
+data:
+  img_size: 224
+  batch_size: 64
+  num_workers: 2
+  seed: 42
+  test_size: 0.2
+
+augmentation:
+  resize: 256
+  crop_size: 224
+  flip_prob: 0.5
+  brightness: 0.15
+  contrast: 0.15
+  saturation: 0.1
+
+model:
+  name: resnet18
+  pretrained: true
+  dropout: 0.2
+
+training:
+  epochs_head: 3
+  epochs_finetune: 7
+  lr_head: 0.001
+  lr_finetune: 0.0003
+  weight_decay: 0.0001
+  patience: 3
+  beta_smooth_l1: 5.0
+
+distillation:
+  enabled: true
+  teacher: resnet50
+  student: resnet18
+  kd_type: response       # "response" or "feature"
+  lambda_task: 1.0        # weight of SmoothL1 task loss
+  lambda_kd: 1.0          # weight of KD loss component
+  teacher_ckpt: "models/teacher_resnet50.pth"
+
+quantization:
+  mode: ptq               # "dynamic" or "ptq"
+  backend: qnnpack        # "qnnpack" (ARM/Mac) or "fbgemm" (x86)
+  calibration_samples: 200
+
+pruning:
+  amount: 0.5             # fraction of weights to zero out
+  structured: false       # true = channel pruning, false = global L1 unstructured
+  finetune_epochs: 3      # fine-tune epochs after pruning
+
+caching:
+  embedding_cache: true
+  prediction_cache: true
+  max_size: 10000         # max entries per cache
+
+# Local paths (update data_dir to your UTKFace location)
+paths:
+  data_dir: "data/UTKFace"
+  logs_dir: "logs/"
+  models_dir: "models/"
+  results_dir: "results/"

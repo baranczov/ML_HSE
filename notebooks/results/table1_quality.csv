@@ -1,0 +1,5 @@
+Model,RMSE,MAE,Acc@5,Acc@10,Size MB
+Teacher (ResNet50),8.0062,5.598,0.595,0.8325,89.98
+Student w/o teacher,7.8355,5.6788,0.5691,0.8254,42.71
+Distilled student,8.009,5.6931,0.5845,0.8209,42.71
+Pruned + fine-tuned,7.8539,5.6556,0.5765,0.8298,42.71
