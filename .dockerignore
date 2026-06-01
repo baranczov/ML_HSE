@@ -1,0 +1,13 @@
+.git
+.venv
+__pycache__
+*.pyc
+data/
+reports/
+examples/
+notebooks/*.ipynb
+notebooks/results/
+models/
+*.pth
+!notebooks/models/distilled_resnet18.pth
+.DS_Store

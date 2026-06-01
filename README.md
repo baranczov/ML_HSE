@@ -65,6 +65,68 @@ python src/train.py --config configs/default.yaml
 python src/evaluate.py --config configs/default.yaml --model models/best_model.pth
 ```
 
+## Web Service (ГП-6)
+
+A production-ready HTTP service with a browser UI that wraps the trained model for real-time age prediction.
+
+### Run locally
+
+```bash
+# Install service dependencies
+pip install fastapi "uvicorn[standard]" pydantic-settings python-multipart httpx
+
+# Start the server (from repo root)
+uvicorn service.main:app --reload
+
+# Open browser
+open http://127.0.0.1:8000
+# OpenAPI docs
+open http://127.0.0.1:8000/docs
+```
+
+### Run with Docker
+
+```bash
+docker build -t age-app .
+docker run -p 8000:8000 age-app
+```
+
+### API endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/health` | Liveness probe |
+| GET | `/ready` | Readiness (503 until model loaded) |
+| GET | `/v1/meta` | Model version, limits, cache stats |
+| POST | `/v1/predict` | Age prediction for one image |
+| POST | `/v1/predict_batch` | Age prediction for up to 8 images |
+
+Images are sent as `multipart/form-data`. Example:
+
+```bash
+curl -F file=@face.jpg http://127.0.0.1:8000/v1/predict
+# {"age": 34.2, "age_bin": "30-39", "cached": false, "model_version": "ab12cd34"}
+```
+
+### Configuration
+
+Copy `.env.example` to `.env` and adjust:
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `MODEL_PATH` | `notebooks/models/distilled_resnet18.pth` | Path to checkpoint |
+| `BACKBONE_NAME` | `resnet18` | Model architecture |
+| `CACHE_SIZE` | `10000` | LRU cache capacity (images) |
+| `MAX_UPLOAD_BYTES` | `5242880` | Max image size (5 MB) |
+| `MAX_BATCH_SIZE` | `8` | Max images per batch request |
+| `MAX_CONCURRENCY` | `4` | Max simultaneous forward passes |
+
+### Run tests
+
+```bash
+pytest tests/test_service.py -v
+```
+
 ## References
 
 - [UTKFace Dataset](https://susanqq.github.io/UTKFace/)

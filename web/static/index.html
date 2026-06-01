@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Age Prediction Service</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <h1>Age Prediction Service</h1>
+  <span class="badge">ГП-6 · HSE ML</span>
+</header>
+
+<nav>
+  <button class="active" data-tab="tab-single">Single image</button>
+  <button data-tab="tab-batch">Batch</button>
+  <button data-tab="tab-status">System status</button>
+</nav>
+
+<main>
+
+  <!-- ── Single predict ──────────────────────────────────── -->
+  <div id="tab-single" class="tab-panel active">
+    <div class="card">
+      <h2>Predict age from a face photo</h2>
+
+      <div id="single-drop" class="drop-zone">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        <p>Click or drag &amp; drop an image here</p>
+        <input type="file" id="single-file" accept="image/*" />
+      </div>
+
+      <div id="single-preview" style="display:none; align-items:flex-start; gap:16px; margin-top:14px">
+        <img id="single-preview-img" style="width:160px; height:160px; object-fit:cover; border-radius:10px; border:1px solid #e0e0e0;" alt="preview" />
+      </div>
+
+      <div class="btn-group">
+        <button id="single-submit" class="btn btn-primary" disabled>Predict age</button>
+        <button id="single-clear" class="btn btn-secondary">Clear</button>
+      </div>
+
+      <div id="single-error" class="error-msg"></div>
+
+      <div id="single-result" class="result-box">
+        <div class="age-display">
+          <div class="age-number" id="res-age">--</div>
+          <div class="age-details">
+            <span class="age-bin-tag" id="res-bin">--</span>
+            <span class="age-meta" id="res-meta"></span>
+            <span class="cache-badge" id="res-cache"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Batch predict ───────────────────────────────────── -->
+  <div id="tab-batch" class="tab-panel">
+    <div class="card">
+      <h2>Batch prediction (up to 8 images)</h2>
+
+      <div id="batch-drop" class="drop-zone">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        <p>Click or drag &amp; drop images here (up to 8)</p>
+        <input type="file" id="batch-file" accept="image/*" multiple />
+      </div>
+
+      <div id="batch-preview-wrap" class="preview-wrap"></div>
+
+      <div class="btn-group">
+        <button id="batch-submit" class="btn btn-primary" disabled>Predict all</button>
+        <button id="batch-clear" class="btn btn-secondary">Clear</button>
+      </div>
+
+      <div id="batch-error" class="error-msg"></div>
+
+      <div id="batch-grid" class="batch-grid"></div>
+    </div>
+  </div>
+
+  <!-- ── System status ────────────────────────────────────── -->
+  <div id="tab-status" class="tab-panel">
+    <div class="card">
+      <h2>
+        System status
+        <button id="refresh-btn" class="btn btn-secondary" style="margin-left:12px; padding:6px 14px; font-size:0.82rem;">↺ Refresh</button>
+      </h2>
+      <table class="meta-table">
+        <tbody id="meta-body">
+          <tr><td colspan="2" style="text-align:center; color:#aaa">Click the tab to load</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  HSE ML Course · Group 08 · Age Prediction Service ·
+  <a href="/docs" target="_blank" style="color:#e94560">OpenAPI docs</a>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
