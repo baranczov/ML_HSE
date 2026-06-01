@@ -65,7 +65,7 @@ python src/train.py --config configs/default.yaml
 python src/evaluate.py --config configs/default.yaml --model models/best_model.pth
 ```
 
-## Web Service (ГП-6)
+## Web Service
 
 A production-ready HTTP service with a browser UI that wraps the trained model for real-time age prediction.
 
